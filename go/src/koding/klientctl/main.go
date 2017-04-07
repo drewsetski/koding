@@ -525,9 +525,22 @@ func run(args []string) {
 			}, {
 				Name:            "cp",
 				Description:     cmdDescriptions["cp"],
+				Usage:           "Copy file(s) between local and remote machines.",
 				Action:          ctlcli.ExitErrAction(MachineCpCommand, log, "cp"),
 				SkipFlagParsing: true,
 				Flags:           []cli.Flag{},
+			}, {
+				Name:            "start",
+				Description:     cmdDescriptions["start-machine"],
+				Usage:           "Start remote machine.",
+				Action:          ctlcli.ExitErrAction(MachineStartCommand, log, "start"),
+				SkipFlagParsing: true,
+			}, {
+				Name:            "stop",
+				Description:     cmdDescriptions["stop-machine"],
+				Usage:           "Stop remote machine.",
+				Action:          ctlcli.ExitErrAction(MachineStopCommand, log, "stop"),
+				SkipFlagParsing: true,
 			}},
 		},
 	}

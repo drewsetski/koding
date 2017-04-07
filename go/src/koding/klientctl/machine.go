@@ -223,6 +223,16 @@ func MachineExecCommand(c *cli.Context, log logging.Logger, _ string) (int, erro
 	return <-done, nil
 }
 
+// MachineStartCommand starts remote machine.
+func MachineStartCommand(c *cli.Context, log logging.Logger, _ string) (int, error) {
+	return 1, fmt.Errorf("not implemented")
+}
+
+// MachineStopCommand stops remote machine.
+func MachineStopCommand(c *cli.Context, log logging.Logger, _ string) (int, error) {
+	return 1, fmt.Errorf("not implemented")
+}
+
 // MachineCpCommand copies file(s) from one machine to another.
 func MachineCpCommand(c *cli.Context, log logging.Logger, _ string) (int, error) {
 	idents, err := getIdentifiers(c)

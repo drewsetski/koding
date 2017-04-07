@@ -135,6 +135,18 @@ machineName:path/to/file syntax. Example:
 
 `,
 	),
+	"start-machine": fmtDesc(
+		"<machine-identifier>",
+		`Start remote machine.
+
+   If machine is already started, this command is a no-op.`,
+	),
+	"stop-machine": fmtDesc(
+		"<machine-identifier>",
+		`Stop remote machine.
+
+   If machine is already stopped, this command is a no-op.`,
+	),
 }
 
 func init() {
