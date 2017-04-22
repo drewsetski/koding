@@ -17,7 +17,6 @@ import (
 	"koding/klient/machine/mount/notify"
 
 	"github.com/jacobsa/fuse"
-	"github.com/jacobsa/fuse/fuseops"
 	"github.com/jacobsa/fuse/fuseutil"
 	"golang.org/x/net/context"
 )
@@ -130,9 +129,6 @@ type Filesystem struct {
 	// Dynamic filesystem state.
 	dirHandles  *DirHandleGroup
 	fileHandles *FileHandleGroup
-
-	// Index node of mount parrent.
-	mDirParentInode fuseops.InodeID
 }
 
 // NewFilesystem creates new Filesystem value.
@@ -152,11 +148,10 @@ func NewFilesystem(opts *Options) (*Filesystem, error) {
 
 	gen := generator(MinHandleID)
 	fs := &Filesystem{
-		Options:         *opts,
-		cancel:          cancel,
-		dirHandles:      NewDirHandleGroup(gen),
-		fileHandles:     NewFileHandleGroup(gen),
-		mDirParentInode: getMountPointParentInode(opts.MountDir),
+		Options:     *opts,
+		cancel:      cancel,
+		dirHandles:  NewDirHandleGroup(opts.MountDir, gen),
+		fileHandles: NewFileHandleGroup(gen),
 	}
 
 	m, err := fuse.Mount(opts.MountDir, fuseutil.NewFileSystemServer(fs), fs.Config())
